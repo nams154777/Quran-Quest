@@ -3,8 +3,8 @@ from supabase import create_client
 
 # -- VERBINDUNG ZU SUPABASE --
 # Diese Keys findest du in Supabase unter Project Settings -> API
-url = "https://ufowkrrsqfonlqjuslfc.supabase.co"
-key = "sb_publishable_vD22k-gTUJcKurgOmLsjnw_Svu44heG   "
+url = st.secrets["SUPABASE_URL"]
+key = st.secrets["SUPABASE_KEY"]
 supabase = create_client(url, key)
 
 st.set_page_config(page_title="Ramadan Quran Quest", page_icon="🌙")
@@ -38,4 +38,5 @@ if st.button("Fortschritt speichern 🚀"):
 # 3. Community Leaderboard
 st.divider()
 st.write("### 📊 Global Leaderboard")
+
 # Hier werden die Daten aus Supabase abgerufen und als Tabelle angezeigt
