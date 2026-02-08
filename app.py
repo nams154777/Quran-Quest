@@ -1,10 +1,19 @@
 import streamlit as st
 from supabase import create_client
 
-# -- VERBINDUNG ZU SUPABASE --
-# Diese Keys findest du in Supabase unter Project Settings -> API
-url = st.secrets["SUPABASE_URL"]
-key = st.secrets["SUPABASE_KEY"]
+# TEST: Zeigt uns, ob die URL ankommt (OHNE den geheimen Key zu zeigen)
+if "SUPABASE_URL" in st.secrets:
+    st.write(f"URL geladen: {st.secrets['SUPABASE_URL'][:10]}...") 
+else:
+    st.error("FEHLER: SUPABASE_URL wurde in den Secrets nicht gefunden!")
+
+url = st.secrets.get("SUPABASE_URL", "")
+key = st.secrets.get("SUPABASE_KEY", "")
+
+# Falls Leerzeichen mitkopiert wurden, entfernen:
+url = url.strip()
+key = key.strip()
+
 supabase = create_client(url, key)
 
 st.set_page_config(page_title="Ramadan Quran Quest", page_icon="🌙")
@@ -40,3 +49,4 @@ st.divider()
 st.write("### 📊 Global Leaderboard")
 
 # Hier werden die Daten aus Supabase abgerufen und als Tabelle angezeigt
+
